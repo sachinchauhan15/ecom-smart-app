@@ -1,0 +1,8 @@
+<%- include("../partials/header", { pageTitle: product.name }) %>
+
+<h1><%= product.name %></h1>
+<p>Price: $<%= product.price %></p>
+
+<a href="/products" class="btn btn-secondary">Back to Products</a>
+
+<%- include("../partials/footer") %>

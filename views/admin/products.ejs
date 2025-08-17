@@ -1,0 +1,59 @@
+<%- include("header", { pageTitle: "Manage Products" }) %>
+
+  <h1>Manage Products</h1>
+  <a href="/admin/products/add" class="btn btn-success mb-3">+ Add Product</a>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (products.length===0) { %>
+        <tr>
+          <td colspan="4" class="text-center">No products found</td>
+        </tr>
+        <% } else { %>
+          <% products.forEach(p=> { %>
+            <tr>
+              <td>
+                <%= p.id %>
+              </td>
+              <td>
+                <% if (p.image) { %>
+                  <img src="<%= p.image %>" width="80">
+                  <% } else { %>
+                    <span>No image</span>
+                    <% } %>
+              </td>
+              <td>
+                <%= p.name %>
+              </td>
+              <td>
+                <%= p.description %>
+              </td>
+              <td>$<%= p.price %>
+              </td>
+              <td>
+                <%= p.stock %>
+              </td>
+              <td>
+                <a href="/admin/products/edit/<%= p.id %>" class="btn btn-warning btn-sm">Edit</a>
+                <form action="/admin/products/delete/<%= p.id %>" method="POST" style="display:inline;">
+                  <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                </form>
+              </td>
+            </tr>
+            <% }) %>
+              <% } %>
+    </tbody>
+  </table>
+
+  <%- include("footer") %>
